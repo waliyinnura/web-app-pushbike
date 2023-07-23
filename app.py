@@ -71,20 +71,23 @@ def signUp():
 
             if len(data) == 0:
                 conn.commit()
-                return jsonify({'message': 'User created successfully !'})
+                response = {'message': 'User created successfully !'}
+                return jsonify(response)
             else:
-                return jsonify({'error': str(data[0])})
+                response = {'error': str(data[0])}
+                return jsonify(response)
         else:
-            return jsonify({'html': '<span>Enter the required fields</span>'})
+            response = {'error': 'Enter the required fields'}
+            return jsonify(response)
 
     except Exception as e:
-        return jsonify({'error': str(e)})
+        response = {'error': str(e)}
+        return jsonify(response)
     finally:
         if cursor:
             cursor.close()
         if conn:
             conn.close()
-
 
 @app.route('/userhome')
 def userHome():
